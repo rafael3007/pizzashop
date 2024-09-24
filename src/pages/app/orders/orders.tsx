@@ -1,16 +1,15 @@
-import { ArrowRight, Search, X } from 'lucide-react'
 import { Helmet } from 'react-helmet-async'
 
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+
+import OrderTableFilters from './components/order-table-filters'
+import OrderTableRow from './components/order-table-row'
 
 export default function Orders() {
   return (
@@ -20,10 +19,7 @@ export default function Orders() {
         <h1 className="text-3xl font-bold tracking-tight">Pedidos</h1>
       </div>
       <div className="space-y-2.5">
-        <form action="" className="flex items-center gap-2">
-          <span className="text-sm font-semibold">Filtros:</span>
-          <Input placeholder="Nome do cliente" className="h-8 w-[320px]" />
-        </form>
+        <OrderTableFilters />
         <div className="border rounded-md">
           <Table>
             <TableHeader>
@@ -40,44 +36,7 @@ export default function Orders() {
             </TableHeader>
             <TableBody>
               {Array.from({ length: 10 }).map((_, i) => (
-                <TableRow key={i}>
-                  <TableCell>
-                    <Button variant="outline" size="xs">
-                      <Search className="w-3 h-3" />
-                      <span className="sr-only">Detalhes do pedido</span>
-                    </Button>
-                  </TableCell>
-                  <TableCell className="font-mono text-xs font-medium">
-                    123124124
-                  </TableCell>
-                  <TableCell className="text-muted-foreground">
-                    já 15minutos
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      <span className="h-2 w-2 rounded-full bg-slate-400" />
-                      <span className="font-medium text-muted-foreground">
-                        Pendente
-                      </span>
-                    </div>
-                  </TableCell>
-                  <TableCell className="font-medium">
-                    Rafael Brito Sampaio
-                  </TableCell>
-                  <TableCell className="font-medium">R$ 149,90</TableCell>
-                  <TableCell>
-                    <Button variant="outline" size="xs">
-                      <ArrowRight className="mr-2 h-3 w-3" />
-                      Aprovar
-                    </Button>
-                  </TableCell>
-                  <TableCell>
-                    <Button variant="ghost" size="xs">
-                      <X className="mr-2 h-3 w-3" />
-                      Cancelar
-                    </Button>
-                  </TableCell>
-                </TableRow>
+                <OrderTableRow key={i} />
               ))}
             </TableBody>
           </Table>
