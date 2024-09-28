@@ -4,6 +4,8 @@ import DayOrdersAmountCard from './components/DayOrdersAmountCard'
 import MonthCanceledOrdersAmountCard from './components/MonthCanceledOrdersAmountCart'
 import MonthOrdersAmountCard from './components/MonthOrdersAmountCard'
 import MonthRevenueCard from './components/MonthRevenueCard'
+import { PopularProductsChart } from './components/PopularProductsCharts/index.tsx'
+import { RevenueChart } from './components/RevenueChart.tsx'
 
 export default function Dashboard() {
   return (
@@ -16,6 +18,11 @@ export default function Dashboard() {
           <MonthOrdersAmountCard />
           <DayOrdersAmountCard />
           <MonthCanceledOrdersAmountCard />
+        </div>
+        <div className="grid grid-cols-9 gap-4">
+          <RevenueChart />
+          <PopularProductsChart />
+          <div className="col-span-"></div>
         </div>
       </div>
     </>
