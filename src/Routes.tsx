@@ -4,7 +4,7 @@ import { AppLayout } from './pages/_layouts/app'
 import { AuthLayout } from './pages/_layouts/auth'
 import { NotFound } from './pages/404'
 import Dashboard from './pages/app/Dashboard/dashboard'
-import Orders from './pages/app/orders/orders'
+import { Orders } from './pages/app/orders/orders'
 import Signin from './pages/auth/sign-in'
 import Signup from './pages/auth/sign-up'
 
