@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/table'
 
 import { OrderTableFilters } from './components/order-table-filters'
-import OrderTableRow from './components/order-table-row'
+import { OrderTableRow } from './components/order-table-row'
 
 export function Orders() {
   const [searchParams, setSearchParams] = useSearchParams()
