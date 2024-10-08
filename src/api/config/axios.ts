@@ -13,7 +13,7 @@ if (env.VITE_ENABLE_API_DELAY) {
       return new Promise((resolve) => {
         setTimeout(() => {
           resolve(config)
-        }, 2000)
+        }, Math.random() * 3000)
       })
     },
     (error) => {

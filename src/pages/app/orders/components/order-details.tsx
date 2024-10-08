@@ -20,12 +20,14 @@ import {
   TableRow,
 } from '@/components/ui/table'
 
-interface OrderDetailsProps {
+import { OrderDetailsSkeleton } from './order-details-skeleton'
+
+export interface OrderDetailsProps {
   orderId: string
   open: boolean
 }
 
-export default function OrderDetails({ orderId, open }: OrderDetailsProps) {
+export function OrderDetails({ orderId, open }: OrderDetailsProps) {
   const { data: order } = useQuery({
     queryKey: ['order', orderId],
     queryFn: () => getOrderDetails({ orderId }),
@@ -38,14 +40,15 @@ export default function OrderDetails({ orderId, open }: OrderDetailsProps) {
         <DialogTitle>Pedido: {orderId}</DialogTitle>
         <DialogDescription>Detalhes do pedido</DialogDescription>
       </DialogHeader>
-      {order && (
-        <div className="space-y-4">
+
+      {order ? (
+        <div className="space-y-6">
           <Table>
             <TableBody>
               <TableRow>
                 <TableCell className="text-muted-foreground">Status</TableCell>
                 <TableCell className="flex justify-end">
-                  <OrderStatus key={order.id} status={order.status} />
+                  <OrderStatus status={order.status} />
                 </TableCell>
               </TableRow>
               <TableRow>
@@ -74,8 +77,8 @@ export default function OrderDetails({ orderId, open }: OrderDetailsProps) {
                 </TableCell>
                 <TableCell className="flex justify-end">
                   {formatDistanceToNow(order.createdAt, {
-                    addSuffix: true,
                     locale: ptBR,
+                    addSuffix: true,
                   })}
                 </TableCell>
               </TableRow>
@@ -86,37 +89,33 @@ export default function OrderDetails({ orderId, open }: OrderDetailsProps) {
             <TableHeader>
               <TableRow>
                 <TableHead>Produto</TableHead>
-                <TableHead className="text-right">Qtd</TableHead>
+                <TableHead className="text-right">Qtd.</TableHead>
                 <TableHead className="text-right">Preço</TableHead>
                 <TableHead className="text-right">Subtotal</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {order.orderItems.map((item) => {
-                return (
-                  <TableRow key={order.id}>
-                    <TableCell>{item.product.name}</TableCell>
-                    <TableCell className="text-center">
-                      {item.quantity}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {(item.priceInCents / 100).toLocaleString('pt-BR', {
+              {order.orderItems.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.product.name}</TableCell>
+                  <TableCell className="text-right">{item.quantity}</TableCell>
+                  <TableCell className="text-right">
+                    {(item.priceInCents / 100).toLocaleString('pt-BR', {
+                      style: 'currency',
+                      currency: 'BRL',
+                    })}
+                  </TableCell>
+                  <TableCell className="text-right">
+                    {((item.priceInCents * item.quantity) / 100).toLocaleString(
+                      'pt-BR',
+                      {
                         style: 'currency',
                         currency: 'BRL',
-                      })}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      {(
-                        (item.priceInCents * item.quantity) /
-                        100
-                      ).toLocaleString('pt-BR', {
-                        style: 'currency',
-                        currency: 'BRL',
-                      })}
-                    </TableCell>
-                  </TableRow>
-                )
-              })}
+                      },
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
             <TableFooter>
               <TableRow>
@@ -131,6 +130,8 @@ export default function OrderDetails({ orderId, open }: OrderDetailsProps) {
             </TableFooter>
           </Table>
         </div>
+      ) : (
+        <OrderDetailsSkeleton />
       )}
     </DialogContent>
   )
