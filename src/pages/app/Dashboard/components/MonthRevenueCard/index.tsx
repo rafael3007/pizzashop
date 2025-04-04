@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MetricCardSkeleton } from '../MetricCardSkeleton'
 
 export default function MonthRevenueCard() {
-  const mes = new Date().toLocaleString('default', { month: 'long' })
+  const mes = 'Abril'
 
   const { data: monthRevenue } = useQuery({
     queryFn: getMonthRevenue,

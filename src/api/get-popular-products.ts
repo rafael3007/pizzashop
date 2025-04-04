@@ -10,5 +10,6 @@ export async function getPopularProducts() {
     '/metrics/popular-products',
   )
 
+  console.log(response)
   return response.data
 }

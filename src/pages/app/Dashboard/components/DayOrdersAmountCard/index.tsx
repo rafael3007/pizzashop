@@ -7,16 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MetricCardSkeleton } from '../MetricCardSkeleton'
 
 export default function DayOrdersAmountCard() {
-  const dia = new Date().toLocaleString('default', {
-    day: 'numeric',
-    month: 'numeric',
-  })
+  const dia = '22'
 
   const { data: dayOrdersAmount } = useQuery({
     queryFn: getDayOrdersAmount,
     queryKey: ['metrics', 'day-orders-amount'],
   })
-
   return (
     <Card>
       <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
