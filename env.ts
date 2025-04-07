@@ -5,6 +5,7 @@ const EnvSchema = z.object({
   VITE_ENABLE_API_DELAY: z
     .string()
     .transform((value: string) => value === 'true'),
+  MODE: z.enum(['development', 'production', 'test']),
 })
 
 export const env = EnvSchema.parse(import.meta.env)
