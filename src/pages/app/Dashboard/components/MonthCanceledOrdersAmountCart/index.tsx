@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { MetricCardSkeleton } from '../MetricCardSkeleton'
 
 export default function MonthCanceledOrdersAmountCard() {
-  const mes = 'Abril'
+  const mes = new Date().toLocaleString('default', { month: 'long' })
 
   const { data: monthCanceledOrdersAmount } = useQuery({
     queryFn: getMonthCanceledOrdersAmount,
@@ -32,15 +32,15 @@ export default function MonthCanceledOrdersAmountCard() {
               {monthCanceledOrdersAmount.diffFromLastMonth <= 0 ? (
                 <>
                   <span className="text-emerald-500 dark:text-emerald-400">
-                    {monthCanceledOrdersAmount.diffFromLastMonth}
+                    {monthCanceledOrdersAmount.diffFromLastMonth}%
                   </span>{' '}
                   em relação ao mês passado
                 </>
               ) : (
                 <>
                   <span className="text-rose-500 dark:text-rose-400">
-                    +{monthCanceledOrdersAmount.diffFromLastMonth}
-                  </span>
+                    +{monthCanceledOrdersAmount.diffFromLastMonth}%
+                  </span>{' '}
                   em relação ao mês passado
                 </>
               )}
