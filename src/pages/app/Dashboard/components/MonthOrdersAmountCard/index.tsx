@@ -33,8 +33,8 @@ export default function MonthOrdersAmountCard() {
                 <>
                   <span className="text-emerald-500 dark:text-emerald-400">
                     +{monthOrdersAmount.diffFromLastMonth}
-                  </span>{' '}
-                  em relação a ontem
+                  </span>
+                  {'  '}em relação a ontem
                 </>
               ) : (
                 <>
